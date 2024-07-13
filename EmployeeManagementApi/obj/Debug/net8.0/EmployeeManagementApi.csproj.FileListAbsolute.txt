@@ -1,0 +1,8 @@
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.csproj.AssemblyReference.cache
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.AssemblyInfoInputs.cache
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.AssemblyInfo.cs
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.csproj.CoreCompileInputs.cache
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\K9999\Desktop\workshops\employee-management-system\EmployeeManagementApi\obj\Debug\net8.0\EmployeeManagementApi.sourcelink.json
