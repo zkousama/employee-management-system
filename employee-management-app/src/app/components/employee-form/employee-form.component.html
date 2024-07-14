@@ -1,1 +1,27 @@
-<p>employee-form works!</p>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="firstName">First Name:</label>
+      <input id="firstName" type="text" formControlName="firstName" required>
+    </div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" type="text" formControlName="lastName" required>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" required>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" type="tel" formControlName="phoneNumber" required>
+    </div>
+    <div>
+      <label for="position">Position:</label>
+      <input id="position" type="text" formControlName="position" required>
+    </div>
+    <div>
+      <label for="department">Department:</label>
+      <input id="department" type="text" formControlName="department" required>
+    </div>
+    <button type="submit" [disabled]="!employeeForm.valid">{{ isEditMode ? 'Update' : 'Create' }} Employee</button>
+  </form>
