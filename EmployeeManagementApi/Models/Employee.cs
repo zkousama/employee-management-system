@@ -1,4 +1,5 @@
 using System;
+
 namespace EmployeeManagementApi.Models {
     public class Employee {
         public Guid Id { get; set; }
