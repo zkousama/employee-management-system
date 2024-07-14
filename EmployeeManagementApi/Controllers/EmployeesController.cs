@@ -1,8 +1,11 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using EmployeeManagementApi.Data;
-
 using EmployeeManagementApi.Models;
+using EmployeeManagementApi.Queries;
+using EmployeeManagementApi.Commands;
+using System.Collections.Generic;
+using System;
+using System.Threading.Tasks;
 
 namespace EmployeeManagementApi.Controllers
 {
@@ -10,68 +13,56 @@ namespace EmployeeManagementApi.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        
-        public EmployeesController(ApplicationDbContext context)
+        private readonly IMediator _mediator;
+
+        public EmployeesController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
         }
 
         // GET: api/Employees
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            var employees = await _mediator.Send(new GetEmployeesQuery());
+            return Ok(employees);
         }
 
         // GET: api/Employees/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(Guid id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _mediator.Send(new GetEmployeeByIdQuery { Id = id });
 
             if (employee == null)
             {
                 return NotFound();
             }
 
-            return employee;
+            return Ok(employee);
         }
 
         // POST api/Employees
         [HttpPost]
-        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
+        public async Task<ActionResult<Employee>> PostEmployee(CreateEmployeeCommand command)
         {
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
+            var employee = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetEmployee), new { id = employee.Id }, employee);
         }
 
         // PUT api/Employees/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(Guid id, Employee employee)
+        public async Task<IActionResult> PutEmployee(Guid id, UpdateEmployeeCommand command)
         {
-            if (id != employee.Id)
+            if (id != command.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(employee).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmployeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            var result = await _mediator.Send(command);
+            
+            if (result == null) {
+                return NotFound();
             }
 
             return NoContent();
@@ -81,21 +72,18 @@ namespace EmployeeManagementApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(Guid id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
+            var result = await _mediator.Send(new DeleteEmployeeCommand { Id = id });
+            
+            if (!result)
             {
                 return NotFound();
             }
 
-            _context.Employees.Remove(employee);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
-
-        private bool EmployeeExists(Guid id)
+        private async Task<bool> EmployeeExists(Guid id)
         {
-            return _context.Employees.Any(e => e.Id == id);
+            return await _mediator.Send(new EmployeeExistsQuery { Id = id });
         }
     }
 }
