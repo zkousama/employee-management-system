@@ -18,10 +18,12 @@ export class EmployeeListComponent implements OnInit {
   }
 
   loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe(
-      (employees) => this.employees = employees,
-      (error) => console.error('Error loading employees:', error)
-    );
+    this.employeeService.getEmployees().subscribe({
+      next: (employees) => this.employees = employees,
+      error: (error) => {
+        console.error('Error loading employees:', error);
+      }
+    });
   }
 
   deleteEmployee(id: string): void {
