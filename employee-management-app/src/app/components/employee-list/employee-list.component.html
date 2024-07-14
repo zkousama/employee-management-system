@@ -1,29 +1,33 @@
-<h2>Employee List</h2>
-<table>
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Phone Number</th>
-      <th>Position</th>
-      <th>Department</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let employee of employees">
-      <td>{{ employee.firstName }}</td>
-      <td>{{ employee.lastName }}</td>
-      <td>{{ employee.email }}</td>
-      <td>{{ employee.phoneNumber }}</td>
-      <td>{{ employee.position }}</td>
-      <td>{{ employee.department }}</td>
-      <td>
-        <button (click)="deleteEmployee(employee.id)">Delete</button>
-        <a [routerLink]="['/employees/edit', employee.id]">Edit</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<a routerLink="/employees/new">Add New Employee</a>
+<div class="container mx-auto mt-8 px-4">
+    <h2 class="text-2xl font-bold mb-4">Employee List</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-3 px-4 text-left">First Name</th>
+            <th class="py-3 px-4 text-left">Last Name</th>
+            <th class="py-3 px-4 text-left">Email</th>
+            <th class="py-3 px-4 text-left">Phone Number</th>
+            <th class="py-3 px-4 text-left">Position</th>
+            <th class="py-3 px-4 text-left">Department</th>
+            <th class="py-3 px-4 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees" class="border-b border-gray-200 hover:bg-gray-50">
+            <td class="py-3 px-4">{{ employee.firstName }}</td>
+            <td class="py-3 px-4">{{ employee.lastName }}</td>
+            <td class="py-3 px-4">{{ employee.email }}</td>
+            <td class="py-3 px-4">{{ employee.phoneNumber }}</td>
+            <td class="py-3 px-4">{{ employee.position }}</td>
+            <td class="py-3 px-4">{{ employee.department }}</td>
+            <td class="py-3 px-4">
+              <button (click)="deleteEmployee(employee.id)" class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 mr-2">Delete</button>
+              <a [routerLink]="['/employees/edit', employee.id]" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <a routerLink="/employees/new" class="inline-block mt-4 bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600">Add New Employee</a>
+  </div>
